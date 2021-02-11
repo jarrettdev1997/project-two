@@ -2,8 +2,7 @@ const { User, Board } = require('../model')
 
 class fromClient {
     constructor(socket, io) {
-        socket.on('clicked box', (data) => {
-            
+        socket.on('clicked box', (data, callback) => {
             Board.update(
                 {
                     upper_left: data.board.upper_left,
@@ -28,7 +27,7 @@ class fromClient {
                         id: data.gameId
                     }
                 })
-                .then(dbData => io.emit('update board', dbData))
+                .then(dbData => callback(dbData))
             })
         })  
     }

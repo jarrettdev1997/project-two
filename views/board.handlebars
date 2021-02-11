@@ -1,23 +1,18 @@
-<table>
+<table id="board-game" data-gameid="{{id}}">
     <tr>
-        <th>left</th>
-        <th>mid</th>
-        <th>right</th>
+        <td id="upper_left"><div>{{#if upper_left}}X{{/if}}</div></td>
+        <td id="upper_mid"><div>{{#if upper_mid}}X{{/if}}</div></td>
+        <td id="upper_right"><div>{{#if upper_right}}X{{/if}}</div></td>
     </tr>
     <tr>
-        <td id="upper_left">{{#if upper_left}}X{{/if}}</td>
-        <td id="upper_mid">{{#if upper_mid}}X{{/if}}</td>
-        <td id="upper_right">{{#if upper_right}}X{{/if}}</td>
+        <td id="center_left"><div>{{#if center_left}}X{{/if}}</div></td>
+        <td id="center_mid"><div>{{#if center_mid}}X{{/if}}</div></td>
+        <td id="center_right"><div>{{#if center_right}}X{{/if}}</div></td>
     </tr>
     <tr>
-        <td id="center_left">{{#if center_left}}X{{/if}}</td>
-        <td id="center_mid">{{#if center_mid}}X{{/if}}</td>
-        <td id="center_right">{{#if center_right}}X{{/if}}</td>
-    </tr>
-    <tr>
-        <td id="lower_left">{{#if lower_left}}X{{/if}}</td>
-        <td id="lower_mid">{{#if lower_mid}}X{{/if}}</td>
-        <td id="lower_right">{{#if lower_right}}X{{/if}}</td>
+        <td id="lower_left"><div>{{#if lower_left}}X{{/if}}</div></td>
+        <td id="lower_mid"><div>{{#if lower_mid}}X{{/if}}</div></td>
+        <td id="lower_right"><div>{{#if lower_right}}X{{/if}}</div></td>
     </tr>
 </table>
 

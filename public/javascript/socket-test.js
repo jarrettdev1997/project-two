@@ -1,44 +1,52 @@
+
 var socket = io()
 
-const sendUpdateToServer = () => {
-    const user = {username: 'dalyd14'}
-    const board = {
-        upper_left: false,
-        upper_mid: false,
-        upper_right: true,
-        center_left: false,
-        center_mid: true,
-        center_right: false,
-        lower_left: true,
-        lower_mid: false,
-        lower_right: false,
-    }
-    const gameId = 1
+const sendUpdateToServer = (event) => {
+    const boardTable = document.getElementById("board-game")
 
-    socket.emit('clicked box', {user, gameId, board})
+    if(!event.target.closest('td')) {
+        console.log('you didnt touch a cell')
+        return
+    }
+
+    const cellClicked = event.target.closest('td').getAttribute('id');
+
+    const user = {username: 'dalyd14'}
+    const gameId = boardTable.dataset.gameid
+    const board = {};
+
+    for (var r = 0; r < boardTable.rows.length; r++) {
+        for (var cell = 0; cell < boardTable.rows[r].cells.length; cell++) {
+            const square = boardTable.rows[r].cells[cell]
+            if(square.getAttribute("id") === cellClicked) {
+                if(square.innerText === 'X') {
+                    board[square.getAttribute("id")] = false
+                } else {
+                    board[square.getAttribute("id")] = true
+                }
+            }
+        }
+    }
+    
+    socket.emit('clicked box', {user, gameId, board}, (boardData) => {
+        updateBoard(boardData)
+    })
 }
 
-socket.on('update board', boardData => {
-    const boardArray = [
-        'upper_left', 
-        'upper_mid', 
-        'upper_right', 
-        'center_left', 
-        'center_mid', 
-        'center_right', 
-        'lower_left', 
-        'lower_mid', 
-        'lower_right'
-    ]
+const updateBoard = (boardData) => {
+    const boardTable = document.getElementById("board-game")
 
-    boardArray.forEach(square => {
-        if (boardData[square]) {
-            document.getElementById(square).textContent = 'X'
-        } else {
-            document.getElementById(square).textContent = ''
+    for (var r = 0; r < boardTable.rows.length; r++) {
+        for (var cell = 0; cell < boardTable.rows[r].cells.length; cell++) {
+            const square = boardTable.rows[r].cells[cell]
+            const content = document.querySelector(`#${square.getAttribute("id")} div`)
+            if (boardData[square.getAttribute("id")]) {
+                content.innerText = 'X'
+            } else {
+                content.innerText = ''
+            }
         }
-        
-    })
-})
+    }
+}
 
-document.getElementById('update-board').addEventListener('click', sendUpdateToServer)
+document.getElementById('board-game').addEventListener('click', sendUpdateToServer)
