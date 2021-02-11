@@ -7,23 +7,15 @@ router.get('/', (req, res) => {
     })
     .then(dbUserData => {
         const users = dbUserData.map(user => user.get({ plain: true }))
-        res.render('homepage', {
-            users
+        Board.findAll()
+        .then(dbData => {
+            const games = dbData.map(game => game.get({ plain: true }))
+            res.render('homepage', {
+                users,
+                games
+            })
         })
     })
-    
-})
-
-router.get('/boards/:id', (req, res) => {
-    Board.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(dbBoardData => {
-        const board = dbBoardData.get({ plain: true })
-        res.render('board', board)
-    })  
 })
 
 module.exports = router
