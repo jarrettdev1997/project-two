@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Board } = require('../model')
+const { User, Game } = require('../model')
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     })
     .then(dbUserData => {
         const users = dbUserData.map(user => user.get({ plain: true }))
-        Board.findAll()
+        Game.findAll()
         .then(dbData => {
             const games = dbData.map(game => game.get({ plain: true }))
             res.render('homepage', {

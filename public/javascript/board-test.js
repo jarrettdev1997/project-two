@@ -1,12 +1,12 @@
-async function createBoard() {
-    const response = await fetch('api/boards', {
+async function createGame() {
+    const response = await fetch('api/games', {
         method: 'post',
         body: JSON.stringify({}),
         headers: {'Content-Type': 'application/jaon'}
     })
 
     if (response.ok) {
-        alert('board created')
+        alert('game created')
         location.reload()
     } else {
         alert('uh oh')
@@ -18,8 +18,8 @@ async function joinGame(event) {
         return
     }
     const gameId = event.target.dataset.gameid
-    window.location = `/boards/${gameId}`
+    window.location = `/games/${gameId}`
 }
 
 document.getElementById('game-btns').addEventListener("click", joinGame)
-document.getElementById('create-board').addEventListener("click", createBoard)
+// document.getElementById('create-board').addEventListener("click", createGame)
