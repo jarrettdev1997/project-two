@@ -14,13 +14,15 @@ router.get('/', (req, res) => {
     
 })
 
-router.get('/boards', (req, res) => {
-    Board.findAll()
+router.get('/boards/:id', (req, res) => {
+    Board.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
     .then(dbBoardData => {
-        const boards = dbBoardData.map(board => board.get({ plain: true }))
-        res.render('board', {
-            boards
-        })
+        const board = dbBoardData.get({ plain: true })
+        res.render('board', board)
     })
     
 })

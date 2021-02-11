@@ -4,11 +4,24 @@
         <th>mid</th>
         <th>right</th>
     </tr>
-    {{#each boards}}
     <tr>
-        <td>{{#if left}}X{{/if}}</td>
-        <td>{{#if mid}}X{{/if}}</td>
-        <td>{{#if right}}X{{/if}}</td>
+        <td id="upper_left">{{#if upper_left}}X{{/if}}</td>
+        <td id="upper_mid">{{#if upper_mid}}X{{/if}}</td>
+        <td id="upper_right">{{#if upper_right}}X{{/if}}</td>
     </tr>
-    {{/each}}
+    <tr>
+        <td id="center_left">{{#if center_left}}X{{/if}}</td>
+        <td id="center_mid">{{#if center_mid}}X{{/if}}</td>
+        <td id="center_right">{{#if center_right}}X{{/if}}</td>
+    </tr>
+    <tr>
+        <td id="lower_left">{{#if lower_left}}X{{/if}}</td>
+        <td id="lower_mid">{{#if lower_mid}}X{{/if}}</td>
+        <td id="lower_right">{{#if lower_right}}X{{/if}}</td>
+    </tr>
 </table>
+
+<button id="update-board">update board</button>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascript/socket-test.js"></script>

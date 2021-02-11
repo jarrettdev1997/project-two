@@ -26,9 +26,15 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     Board.create({
-        left: req.body.left,
-        mid: req.body.mid,
-        right: req.body.right
+        upper_left: req.body.upper_left,
+        upper_mid: req.body.upper_mid,
+        upper_right: req.body.upper_right,
+        center_left: req.body.center_left,
+        center_mid: req.body.center_mid,
+        center_right: req.body.center_right,
+        lower_left: req.body.lower_left,
+        lower_mid: req.body.lower_mid,
+        lower_right: req.body.lower_right,
     })
     .then(dbBoardData => res.json(dbBoardData))
     .catch(err => {
@@ -39,9 +45,15 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     Board.update({
-        left: req.body.left,
-        mid: req.body.mid,
-        right: req.body.right
+        upper_left: req.body.upper_left,
+        upper_mid: req.body.upper_mid,
+        upper_right: req.body.upper_right,
+        center_left: req.body.center_left,
+        center_mid: req.body.center_mid,
+        center_right: req.body.center_right,
+        lower_left: req.body.lower_left,
+        lower_mid: req.body.lower_mid,
+        lower_right: req.body.lower_right,
     },
     {
         where: {

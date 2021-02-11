@@ -31,6 +31,15 @@ const hbs = exphbs.create({ });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars')
 
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
+
+function getSocketIo(){
+    return io;
+}
+module.exports.getSocketIo=getSocketIo
+
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now listening on ${PORT}`))
+    require('./sockets/connectSocket')(io)
+    http.listen(PORT, () => console.log(`Now listening on ${PORT}`))
 })

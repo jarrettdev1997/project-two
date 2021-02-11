@@ -12,17 +12,47 @@ Board.init(
             primaryKey: true,
             autoIncrement: true
         },
-        left: {
+        upper_left: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
-        mid: {
+        upper_mid: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
-        right: {
+        upper_right: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        center_left: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        center_mid: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        center_right: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        lower_left: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        lower_mid: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        lower_right: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
