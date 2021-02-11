@@ -11,6 +11,14 @@ Game.init(
             primaryKey: true,
             autoIncrement: true
         },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'not_started',
+            validate: {
+                isIn: [['not_started', 'in_progress', 'finished']]
+            }
+        },
         owner_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -32,6 +40,22 @@ Game.init(
             allowNull: false,
             references: {
                 model: 'board',
+                key: 'id'
+            }
+        },
+        winner_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
+        },
+        loser_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'user',
                 key: 'id'
             }
         }
