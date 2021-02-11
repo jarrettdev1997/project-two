@@ -23,8 +23,7 @@ router.get('/boards/:id', (req, res) => {
     .then(dbBoardData => {
         const board = dbBoardData.get({ plain: true })
         res.render('board', board)
-    })
-    
+    })  
 })
 
 module.exports = router

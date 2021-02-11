@@ -4,6 +4,6 @@ const userRoutes = require('./user-routes');
 const boardRoutes = require('./board-routes')
 
 router.use('/users', userRoutes);
-router.use('/board', boardRoutes)
+router.use('/boards', boardRoutes)
 
 module.exports = router
