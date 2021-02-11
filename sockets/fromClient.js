@@ -16,16 +16,12 @@ class fromClient {
                     lower_right: data.board.lower_right,
                 },
                 {
-                    where: {
-                        id: data.gameId
-                    }
+                    where: { id: data.gameId }
                 }
             )
             .then(dbData => {
                 Board.findOne({
-                    where: {
-                        id: data.gameId
-                    }
+                    where: { id: data.gameId }
                 })
                 .then(dbData => callback(dbData))
             })
