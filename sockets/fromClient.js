@@ -23,7 +23,16 @@ class fromClient {
                 Board.findOne({
                     where: { id: data.gameId }
                 })
-                .then(dbData => callback(dbData))
+                .then(dbData => {
+                    io.emit('update board', dbData)
+                    callback({ok: true})
+                })
+                .catch((err) => {
+                    callback({
+                        ok: false,
+                        message: err
+                    })
+                })
             })
         })  
     }

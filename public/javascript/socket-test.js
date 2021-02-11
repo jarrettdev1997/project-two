@@ -28,8 +28,10 @@ const sendUpdateToServer = (event) => {
         }
     }
     
-    socket.emit('clicked box', {user, gameId, board}, (boardData) => {
-        updateBoard(boardData)
+    socket.emit('clicked box', {user, gameId, board}, (response) => {
+        if (!response.ok) {
+            alert(response.message)
+        }
     })
 }
 
@@ -48,5 +50,7 @@ const updateBoard = (boardData) => {
         }
     }
 }
+
+socket.on('update board', boardData => updateBoard(boardData))
 
 document.getElementById('board-game').addEventListener('click', sendUpdateToServer)
