@@ -17,6 +17,6 @@ const gameData = [
     }
 ];
 
-const seedGame = () => Game.create(gameData);
+const seedGame = () => Game.bulkCreate(gameData);
 
 module.exports = seedGame;

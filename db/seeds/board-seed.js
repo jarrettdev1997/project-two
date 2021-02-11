@@ -25,6 +25,6 @@ const boardData = [
     }
 ];
 
-const seedBoard = () => Board.create(boardData);
+const seedBoard = () => Board.bulkCreate(boardData);
 
 module.exports = seedBoard;

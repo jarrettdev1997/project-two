@@ -4,12 +4,30 @@ const { Game, User, Board } = require('../../model')
 
 router.get('/', (req, res) => {
     Game.findAll({
+        attributes: ['id', 'status'],
         include: [
             {
                 model: Board,
             },
             {
-                model: User
+                model: User,
+                as: 'game_owner',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
+                as: 'friend',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
+                as: 'winner',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
+                as: 'loser',
+                attributes: { exclude: ['password']}
             }
         ]
     })
@@ -25,12 +43,30 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         },
+        attributes: ['id', 'status'],
         include: [
             {
                 model: Board,
             },
             {
-                model: User
+                model: User,
+                as: 'game_owner',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
+                as: 'friend',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
+                as: 'winner',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
+                as: 'loser',
+                attributes: { exclude: ['password']}
             }
         ]
     })
