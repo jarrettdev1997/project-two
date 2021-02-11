@@ -13,49 +13,85 @@ Board.init(
             autoIncrement: true
         },
         upper_left: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: false
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 2
+            }
         },
         upper_mid: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: false
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 2
+            }
         },
         upper_right: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: false
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 2
+            }
         },
         center_left: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: false
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 2
+            }
         },
         center_mid: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: false
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 2
+            }
         },
         center_right: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: false
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 2
+            }
         },
         lower_left: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: false
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 2
+            }
         },
         lower_mid: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: false
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 2
+            }
         },
         lower_right: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: false
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 2
+            }
         }
     },
     {
