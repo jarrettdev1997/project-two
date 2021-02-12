@@ -26,11 +26,15 @@ app.use(session(sess));
 const routes = require('./controllers');
 app.use(routes);
 
-// const helpers = require('./utils/helpers')
-const hbs = exphbs.create({ });
+const helpers = require('./utils/helpers')
+const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars')
 
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
+
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now listening on ${PORT}`))
+    require('./sockets/connectSocket')(io)
+    http.listen(PORT, () => console.log(`Now listening on ${PORT}`))
 })

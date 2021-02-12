@@ -1,8 +1,22 @@
-<h1>I am baaaack</h1>
 {{#if users}}
+<h1>Users</h1>
 <ul>
     {{#each users}}
     <li>{{username}}</li>
     {{/each}}
 </ul>
 {{/if}}
+{{#if games}}
+<h1>Games</h1>
+<ul id='game-btns'>
+    {{#each games}}
+    <li>
+        <button id="join-game" data-gameid="{{id}}">Join Game {{id}}</button>
+    </li>
+    {{/each}}
+</ul>
+{{/if}}
+
+<button id="create-board">Create Board</button>
+
+<script src="/javascript/board-test.js"></script>

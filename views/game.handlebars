@@ -1,0 +1,6 @@
+{{>board}}
+
+{{#unless (isFinished status)}}
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascript/socket-test.js"></script>
+{{/unless}}
