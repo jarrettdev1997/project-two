@@ -33,6 +33,7 @@ app.set('view engine', 'handlebars')
 
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
+app.io = io
 
 sequelize.sync({ force: false }).then(() => {
     require('./sockets/connectSocket')(io)

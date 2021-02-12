@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Board } = require('../../model')
+const { Board } = require('../../model');
 // const withAuth = require('../../utils/auth')
 
 router.get('/', (req, res) => {
@@ -17,7 +17,10 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         }
     })
-    .then(dbBoardData => res.json(dbBoardData))
+    .then(dbBoardData => {
+        req.app.io.emit('testing ' + dbBoardData.id, {message: 'hi'})
+        res.json(dbBoardData)
+    })
     .catch(err => {
         console.log(err)
         res.status(500).json(err)

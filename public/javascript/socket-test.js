@@ -53,6 +53,10 @@ const updateBoard = (boardData) => {
     }
 }
 
-socket.on('update board', boardData => updateBoard(boardData))
+const windowPath = location.href.split('/')[location.href.split('/').length-1]
+console.log(windowPath)
+socket.on(`testing ${windowPath}`, data => console.log(data.message))
+
+socket.on(`update board`, boardData => updateBoard(boardData))
 
 document.getElementById('board-game').addEventListener('click', sendUpdateToServer)
