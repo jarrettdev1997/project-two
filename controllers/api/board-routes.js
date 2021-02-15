@@ -3,9 +3,6 @@ const { Board, Game } = require('../../model');
 const toClient = require('../../sockets/toClient')
 // const withAuth = require('../../utils/auth')
 
-const gameService = new GameService();
-
-
 router.get('/', (req, res) => {
     Board.findAll()
     .then(dbBoardData => res.json(dbBoardData))
