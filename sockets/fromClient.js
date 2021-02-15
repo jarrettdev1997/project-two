@@ -3,6 +3,7 @@ const { User, Board } = require('../model')
 class fromClient {
     constructor(socket, io) {
         socket.on('clicked box', (data, callback) => {
+            console.log("updated board" + data.gameId + data.newMove);
             Board.update(
                 {
                     upper_left: data.board.upper_left,

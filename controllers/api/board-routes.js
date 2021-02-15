@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const { Board } = require('../../model')
+const GameService = require('../../service/game-service');
 // const withAuth = require('../../utils/auth')
+
+const gameService = new GameService();
+
 
 router.get('/', (req, res) => {
     Board.findAll()
@@ -44,6 +48,8 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+    console.log("updating board" + req.params.id + JSON.stringify(req.body) + "xxx");
+    console.log("1234" + req.body.newMove);
     Board.update({
         upper_left: req.body.upper_left,
         upper_mid: req.body.upper_mid,
@@ -60,7 +66,7 @@ router.put('/:id', (req, res) => {
             id: req.params.id
         }
     })
-    .then(dbBoardData => res.json(dbBoardData))
+    .then(dbBoardData => res.json (req.body))
     .catch(err => {
         console.log(err)
         res.status(500).json(err)
