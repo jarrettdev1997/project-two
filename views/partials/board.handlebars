@@ -1,17 +1,17 @@
 <table id="board-game" data-gameid="{{board.id}}">
     <tr>
-        <td id="upper_left"><div>{{getXorO board.upper_left}}</div></td>
-        <td id="upper_mid"><div>{{getXorO board.upper_mid}}</div></td>
-        <td id="upper_right"><div>{{getXorO board.upper_right}}</div></td>
+        <td id="upper_left" cell = "0"><div>{{board.upper_left}}</div></td>
+        <td id="upper_mid" cell = "1"><div>{{getXorO board.upper_mid}}</div></td>
+        <td id="upper_right" cell = "2"><div>{{getXorO board.upper_right}}</div></td>
     </tr>
     <tr>
-        <td id="center_left"><div>{{getXorO board.center_left}}</div></td>
-        <td id="center_mid"><div>{{getXorO board.center_mid}}</div></td>
-        <td id="center_right"><div>{{getXorO board.center_right}}</div></td>
+        <td id="center_left" cell = "3"><div>{{getXorO board.center_left}}</div></td>
+        <td id="center_mid" cell = "4"><div>{{getXorO board.center_mid}}</div></td>
+        <td id="center_right" cell = "5"><div>{{getXorO board.center_right}}</div></td>
     </tr>
     <tr>
-        <td id="lower_left"><div>{{getXorO board.lower_left}}</div></td>
-        <td id="lower_mid"><div>{{getXorO board.lower_mid}}</div></td>
-        <td id="lower_right"><div>{{getXorO board.lower_right}}</div></td>
+        <td id="lower_left" cell = "6"><div>{{getXorO board.lower_left}}</div></td>
+        <td id="lower_mid" cell = "7"><div>{{getXorO board.lower_mid}}</div></td>
+        <td id="lower_right" cell = "8"><div>{{getXorO board.lower_right}}</div></td>
     </tr>
 </table>
