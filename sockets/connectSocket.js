@@ -7,7 +7,7 @@ class socketConnection {
             socket.on('disconnect', () => {
                 console.log('user disconnected')
             })
-            require('./fromClient')(socket, io)
+            // require('./fromClient')(socket, io);
         })
     }
 }

@@ -1,7 +1,36 @@
+<div class="game-nav">
+    <h3>Exit</h3>
+</div>
+<div class="game-infor-bar container">
+    <div class="row">
+        <div class="x-player player col">
+            <div class="row x-or-o-icon">
+                <span class="material-icons">close</span>
+            </div>
+            <div class="row user-name">
+                <h1>ddaly</h1>
+            </div>
+        </div>
+        <div class="turn-status col">
+            <h2>It is ddaly's turn</h2>
+        </div>
+        <div class="o-player player col">
+            <div class="row x-or-o-icon">
+                <span class="material-icons">panorama_fish_eye</span>
+            </div>
+            <div class="row user-name">
+                <h1>krob</h1>
+            </div> 
+        </div>
+    </div>
+</div>
+<section class="game-board">
 {{>board}}
+</section>
 
 {{#unless (isFinished status)}}
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/javascript/socket.js"></script>
+<script src="/javascript/board-requests.js"></script>
 {{/unless}}
