@@ -1,11 +1,8 @@
 class toClient {
-    constructor(socket, io) {
-        this.socket = socket,
-        this.io = io
-    }
-    broadcastBoardUpdate(data) {
-        this.io.emit('testing', {message: 'hello'})
+    constructor() {}
+    emitBoardUpdate(app, gameId, data) {
+        app.io.emit('testing ' + gameId, data)
     }
 }
 
-module.exports = (socket, io) => new toClient(socket, io)
+module.exports = toClient
