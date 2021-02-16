@@ -1,5 +1,7 @@
 <div class="game-nav">
-    <h3>Exit</h3>
+    <a class="btn btn-primary" href="/dashboard">
+        <h3><span class="material-icons">reply</span> Exit Game</h3>
+    </a>
 </div>
 <div class="game-infor-bar container">
     <div class="row">
@@ -30,6 +32,5 @@
 
 {{#unless (isFinished status)}}
 <script src="/socket.io/socket.io.js"></script>
-<script src="/javascript/socket.js"></script>
-<script src="/javascript/board-requests.js"></script>
+<script src="/javascript/games.js"></script>
 {{/unless}}

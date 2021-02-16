@@ -2,9 +2,9 @@ module.exports = {
     getXorO: number => {
         let letter = ''
         if (number === 1) {
-            letter = 'X'
+            letter = 'close'
         } else if (number === 2) {
-            letter ='O'
+            letter ='panorama_fish_eye'
         }
         return letter
     },

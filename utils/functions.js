@@ -27,19 +27,22 @@ const getGameHistory = (games, userId) => {
                     name = game.game_owner.username
                 }
                 inprogressGames.push({
-                    opponent: name
+                    opponent: name,
+                    gameId: game.id
                 })
                 break;
             case "not_started":
                 if (game.owner_id === userId) {
                     let name = game.friend.username
                     pendingGames.push({
-                        opponent: name
+                        opponent: name,
+                        gameId: game.id
                     })
                 } else {
                     let name = game.game_owner.username
                     waitingGames.push({
-                        opponent: name
+                        opponent: name,
+                        gameId: game.id
                     })
                 }
                 break;
@@ -57,7 +60,8 @@ const getGameHistory = (games, userId) => {
                     }
                 }
                 finishedGames.push({
-                    message: message
+                    message: message,
+                    gameId: game.id
                 })
                 break;
         }
