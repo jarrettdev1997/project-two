@@ -1,22 +1,15 @@
-{{#if users}}
-<h1>Users</h1>
-<ul>
-    {{#each users}}
-    <li>{{username}}</li>
-    {{/each}}
-</ul>
-{{/if}}
-{{#if games}}
-<h1>Games</h1>
-<ul id='game-btns'>
-    {{#each games}}
-    <li>
-        <button id="join-game" data-gameid="{{id}}">Join Game {{id}}</button>
-    </li>
-    {{/each}}
-</ul>
-{{/if}}
+<h1>Ultimate Free Tic-Tac-Toe</h1>
+<h4>Welcome to the best free tic-tac-toe game environemnt! You can challenge your friends and keep track of your progress!</h4>
+<h6>Login to get started now!</h6>
+<button id="go-to-login">Login</button>
 
-<button id="create-board">Create Board</button>
+<h5>How to get started</h5>
+<ol>
+    <li>First either login to your existing account or sign up to create a new one</li>
+    <li>Then start a new game from your dashboard</li>
+    <li>Make sure to enter your frined's username that you want to play with</li>
+    <li>When you both join the game, it will start</li>
+    <li>Finally, play tic-tac-toe to see who is the best!</li>
+</ol>
 
-<script src="/javascript/board-test.js"></script>
+<script src="/javascript/home-unauth.js"></script>

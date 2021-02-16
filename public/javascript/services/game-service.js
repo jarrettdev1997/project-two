@@ -1,4 +1,4 @@
-const Board = require("../model/Board");
+const Board = require("../../../model/Board");
 
 class GameService {
 determineAWinner(board, player) {

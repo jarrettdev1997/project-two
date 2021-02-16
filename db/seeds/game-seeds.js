@@ -8,6 +8,12 @@ const gameData = [
         board_id: 1,
     },
     {
+        status: 'in_progress',
+        owner_id: 1,
+        friend_id: 2,
+        board_id: 3,
+    },
+    {
         status: 'finished',
         owner_id: 3,
         friend_id: 2,

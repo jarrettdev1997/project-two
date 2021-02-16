@@ -11,6 +11,44 @@
     <title>Tic Tac Toe</title>
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-info">
+            <a class="navbar-brand" href="/">
+                <img src="/images/logo.png" alt="Tic-Tac-Toe logo" style="height:30px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDropDown" aria-controls="navbarDropDown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarDropDown">
+                <ul class="navbar-nav mr-auto align-items-md-center">
+                    {{!-- Only if the user is not logged in yet --}}
+                    <li class="nav-item active">
+                        <a class="nav-link d-flex" href="/">
+                            <span class="material-icons">home</span>
+                        </a>
+                    </li>
+                    {{!-- Only if the user is not logged in yet --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    {{!-- Only if the user is logged in yet --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    {{!-- Only if the user is logged in yet --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/requests">Requests</a>
+                    </li>
+                    {{!-- Only if the user is logged in yet --}}
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-link nav-link" id="logout-btn">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     {{{ body }}}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>

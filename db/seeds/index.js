@@ -1,5 +1,5 @@
 const seedUsers = require('./users-seeds');
-const seedBoard = require('./board-seed');
+const seedBoard = require('./board-seeds');
 const seedGame = require('./game-seeds')
 
 const sequelize = require('../../config/connection');

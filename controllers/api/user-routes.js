@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User } = require('../../model')
+const { Op } = require("sequelize");
+const { User, Game } = require('../../model')
 // const withAuth = require('../../utils/auth')
 
 router.get('/', (req, res) => {
@@ -19,6 +20,22 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         attributes: { exclude: ['password']}
+    })
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+        console.log(err)
+        res.status(500).json(err)
+    });
+})
+
+router.get('/inGames/:id', (req, res) => {
+    Game.findAll({
+        where: {
+            [Op.or]: [
+                { owner_id: req.params.id },
+                { friend_id: req.params.id }
+            ]           
+        }
     })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
