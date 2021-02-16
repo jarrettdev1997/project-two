@@ -33,32 +33,6 @@ const sendUpdateToServer = function() {
     })      
 }
 
-// const XorOorBlank = (text) => {
-//     let cell = 0
-//     switch (text) {
-//         case 'close':
-//             cell= 1
-//             break;
-//         case 'panorama_fish_eye':
-//             cell= 2
-//             break;
-//         default:
-//             cell = 0
-//             break;
-//     }
-//     return cell
-// }
-
-// const createBoardObject = function () {
-//     const boardCells = $("table#board-game td")
-//     const boardObj = {}
-//     boardCells.each(function() {
-//         console.log($(this).attr('id'))
-//         boardObj[$(this).attr('id')] = XorOorBlank($(this).text())
-//     })
-//     console.log(boardObj)
-// }
-
 const sendFinalToServer = (gameInfo) => {
     fetch(`/api/games/final/${gameInfo.id}`, {
         method: 'put',
@@ -125,4 +99,4 @@ const updateBoard = (board) => {
 const windowPath = location.href.split('/')[location.href.split('/').length-1]
 socket.on(`game-${windowPath}`, data => updateBoard(data))
 
-$('td').on('click', createBoardObject)
+$('td').on('click', sendUpdateToServer)
