@@ -34,7 +34,7 @@
     <h3>Games in Progress</h3>
     <ul>
         {{#each history.inprogressGames}}
-        <li>You are currently in a game with {{opponent}}</li>
+        <li>You are currently in a game with {{opponent}} <a href="/games/{{gameId}}" class="btn btn-primary">Join Now!</a></li>
         {{/each}}
     </ul>
     {{/if}}
@@ -43,7 +43,7 @@
     <h3>Games Waiting For You To Join</h3>
     <ul>
         {{#each history.waitingGames}}
-        <li>{{opponent}} invited you to play a game <button>Join Now!</button></li>
+        <li>{{opponent}} invited you to play a game <a href="/games/{{gameId}}" class="btn btn-primary">Join Now!</a></li>
         {{/each}}
     </ul>
     {{/if}}
@@ -52,7 +52,7 @@
     <h3>Games Waiting For Your Friend To Join</h3>
     <ul>
         {{#each history.pendingGames}}
-        <li>You invited {{opponent}} to play a game <button>Join Now!</button></li>
+        <li>You invited {{opponent}} to play a game <a href="/games/{{gameId}}" class="btn btn-primary">Join Now!</a></li>
         {{/each}}
     </ul>
     {{/if}}
@@ -61,7 +61,7 @@
     <h3>Games That have Been Completed</h3>
     <ul>
         {{#each history.finishedGames}}
-        <li>{{message}} <button>Check it out!</button></li>
+        <li>{{message}} <a href="/games/{{gameId}}" class="btn btn-primary">Check It Out!</a></li>
         {{/each}}
     </ul>
     {{/if}}
