@@ -9,6 +9,9 @@
 tr, td {
     border: 1px solid black;
 }
+td {
+    width: 33.33333%
+}
 td div {
     height: 50px;
 
