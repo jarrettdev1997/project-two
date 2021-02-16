@@ -126,4 +126,40 @@ router.put('/:id', (req, res) => {
     });
 })
 
+router.put('/final/:id', (req, res) => {
+    Game.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(gameData => {
+        let winner_id = null;
+        let loser_id = null;
+
+        if (req.body.winner === 'owner') {
+            winner_id = gameData.owner_id;
+            loser_id = gameData.friend_id
+        } else if (req.body.winner === 'friend') {
+            loser_id = gameData.owner_id;
+            winner_id = gameData.friend_id
+        }
+
+        return Game.update({
+            status: req.body.status,
+            winner_id,
+            loser_id
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+    })
+    .then(dbGameData => res.json(dbGameData))
+    .catch(err => {
+        console.log(err)
+        res.status(500).json(err)
+    });
+})
+
 module.exports = router
