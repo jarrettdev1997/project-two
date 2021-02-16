@@ -1,49 +1,70 @@
-<h1>Career Stats</h1>
-<table>
-    <tr>
-        <th>Wins</th>
-        <th>Losses</th>
-        <th>Ties</th>
-    </tr>
-    <tr>
-        <td>{{WLT.wins}}</td>
-        <td>{{WLT.losses}}</td>
-        <td>{{WLT.ties}}</td>
-    </tr>
-</table>
+<section id="win-loss-stats">
+    <h1>Career Stats</h1>
+    <table>
+        <tr>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Ties</th>
+        </tr>
+        <tr>
+            <td>{{WLT.wins}}</td>
+            <td>{{WLT.losses}}</td>
+            <td>{{WLT.ties}}</td>
+        </tr>
+    </table>    
+</section>
 
-{{#if history.inprogressGames}}
-<h3>Games in Progress</h3>
-<ul>
-    {{#each history.inprogressGames}}
-    <li>You are currently in a game with {{opponent}}</li>
-    {{/each}}
-</ul>
-{{/if}}
+<section id="new-game">
+    <h1>Start a new game!</h1>
+    <button id="start-game" type="button" data-toggle="collapse" data-target="#new-game-form" aria-expanded="false" aria-controls="new-game-form">
+        Start Game
+    </button>
 
-{{#if history.waitingGames}}
-<h3>Games Waiting For You To Join</h3>
-<ul>
-    {{#each history.waitingGames}}
-    <li>{{opponent}} invited you to play a game <button>Join Now!</button></li>
-    {{/each}}
-</ul>
-{{/if}}
+    <form id="new-game-form" class="collapse">
+        <label for="friend-username">Who would you like to play with?</label>
+        <input type="text" id="friend-username" name="friend-username">
+        <button type="submit">Submit</button>
+        <button id="cancel-new-game" type="button" data-toggle="collapse" data-target="#new-game-form" aria-expanded="false" aria-controls="new-game-form">Cancel</button>
+    </form>    
+</section>
 
-{{#if history.pendingGames}}
-<h3>Games Waiting For Your Friend To Join</h3>
-<ul>
-    {{#each history.pendingGames}}
-    <li>You invited {{opponent}} to play a game <button>Join Now!</button></li>
-    {{/each}}
-</ul>
-{{/if}}
+<section id="game-status">
+    <h1>Games Status</h1>
+    {{#if history.inprogressGames}}
+    <h3>Games in Progress</h3>
+    <ul>
+        {{#each history.inprogressGames}}
+        <li>You are currently in a game with {{opponent}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
 
-{{#if history.finishedGames}}
-<h3>Games That have Been Completed</h3>
-<ul>
-    {{#each history.finishedGames}}
-    <li>{{message}} <button>Check it out!</button></li>
-    {{/each}}
-</ul>
-{{/if}}
+    {{#if history.waitingGames}}
+    <h3>Games Waiting For You To Join</h3>
+    <ul>
+        {{#each history.waitingGames}}
+        <li>{{opponent}} invited you to play a game <button>Join Now!</button></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
+    {{#if history.pendingGames}}
+    <h3>Games Waiting For Your Friend To Join</h3>
+    <ul>
+        {{#each history.pendingGames}}
+        <li>You invited {{opponent}} to play a game <button>Join Now!</button></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
+    {{#if history.finishedGames}}
+    <h3>Games That have Been Completed</h3>
+    <ul>
+        {{#each history.finishedGames}}
+        <li>{{message}} <button>Check it out!</button></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</section>
+
+<script src="/javascript/dashboard.js"></script>
