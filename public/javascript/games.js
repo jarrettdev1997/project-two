@@ -1,3 +1,5 @@
+const { parse } = require("dotenv/types");
+
 var socket = io()
 
 var thisUserId = $('#game-script-tag').attr('data-user')
@@ -48,8 +50,10 @@ const sendUpdateToServer = function() {
     })
 }
 
-const sendFinalToServer = (gameInfo) => {
-    console.log('game finished!', gameInfo)
+const sendFinalToServer = (gameInfo, currentUser) => {
+    const xUser = { id: $("#user-x").data('userid'), name: $("#user-x").text() }
+    const oUser = { id: $("#user-o").data('userid'), name: $("#user-o").text() }
+
     fetch(`/api/games/final/${gameInfo.id}`, {
         method: 'put',
         body: JSON.stringify({
@@ -58,7 +62,24 @@ const sendFinalToServer = (gameInfo) => {
         }),
         headers: {'Content-Type': 'application/json'}
     })
-    .then()
+    .then(() => {
+        if (gameInfo.winner === 'owner') {
+            if (xUser.id === parseInt(currentUser)) {
+                alert(`Congrats! You won the game`)
+            } else {
+                alert(`Sorry! You lost the game`)
+            }
+        } else if (gameInfo.winner === 'friend') {
+            if (oUser.id === parseInt(currentUser)) {
+                alert(`Congrats! You won the game`)
+            } else {
+                alert(`Sorry! You lost the game`)
+            }
+        } else {
+            alert(`You have both tied the game`)
+        }
+        window.location = '/'
+    })
     .catch(err => {
         console.log(err)
     })
@@ -87,28 +108,24 @@ const fillInBoard = (board) => {
     })
 }
 
-const changeTurn = () => {
+const changeTurn = (currentUser) => {
     const xUser = { id: $("#user-x").data('userid'), name: $("#user-x").text() }
-    const yUser = { id: $("#user-y").data('userid'), name: $("#user-y").text() }
-
-    const currentUser = localStorage.getItem('user_id')
-    if(!currentUser) {
-        window.location = '/'
-        return
-    }
+    const oUser = { id: $("#user-o").data('userid'), name: $("#user-o").text() }
 
     if($('#turn-user').data('userid') === xUser.id) {
-        if (parseInt(currentUser) === yUser.id) {
+        if (parseInt(currentUser) === oUser.id) {
             $('#turn-user').text(`It is your turn`)
         } else {
-            $('#turn-user').text(`It is ${yUser.name}'s turn`)
+            $('#turn-user').text(`It is ${oUser.name}'s turn`)
         }
+        $('#turn-user').data('userid', oUser.id)
     } else {
         if (parseInt(currentUser) === xUser.id) {
             $('#turn-user').text(`It is your turn`)
         } else {
             $('#turn-user').text(`It is ${xUser.name}'s turn`)
         }
+        $('#turn-user').data('userid', xUser.id)
     }
 }
 
@@ -118,19 +135,20 @@ const updateBoard = (data) => {
     fillInBoard(board)
 
     const winner = determineWinner(board)
-    
+
+    let currentUser = localStorage.getItem('user_id')
+    if(!currentUser) {
+        window.location = '/'
+        return
+    } 
+
     if (winner === 0 && !isGameFull(board)) {
-        let currentUser = localStorage.getItem('user_id')
-        if(!currentUser) {
-            window.location = '/'
-            return
-        } 
         if (parseInt(currentUser) === data.turnId) {
             isTurn = true
         } else {
             isTurn = false
         }
-        changeTurn()
+        changeTurn(currentUser)
         return
     }
 
@@ -152,7 +170,7 @@ const updateBoard = (data) => {
             gameInfo.winner = null
             break;
     }
-    sendFinalToServer(gameInfo)
+    sendFinalToServer(gameInfo, currentUser)
 }
 
 window.localStorage.setItem('user_id', thisUserId)
