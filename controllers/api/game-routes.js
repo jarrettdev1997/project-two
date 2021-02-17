@@ -3,6 +3,7 @@ const { Game, User, Board } = require('../../model')
 // const withAuth = require('../../utils/auth')
 
 router.get('/', (req, res) => {
+    console.log("get");
     Game.findAll({
         attributes: ['id', 'status'],
         include: [
@@ -78,6 +79,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    console.log("post");
     Board.create({
         upper_left: 0,
         upper_mid: 0,

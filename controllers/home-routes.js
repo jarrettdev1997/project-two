@@ -9,10 +9,13 @@ router.get('/', (req, res) => {
         const users = dbUserData.map(user => user.get({ plain: true }))
         Game.findAll()
         .then(dbData => {
-            const games = dbData.map(game => game.get({ plain: true }))
+            const games = dbData.map(game => game.get({ plain: true}))
+            if (req.session.loggedIn) {
+                res.redirect('/dashboard')
+                return 
+            }
             res.render('homepage', {
-                users,
-                games
+                session: req.session
             })
         })
     })
