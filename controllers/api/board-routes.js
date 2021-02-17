@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Board, Game } = require('../../model');
 const toClient = require('../../sockets/toClient')
-// const withAuth = require('../../utils/auth')
+const withAuth = require('../../utils/auth')
 
 router.get('/', (req, res) => {
     Board.findAll()
@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
     });
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Game.findOne({
         where: {
             id: req.params.id

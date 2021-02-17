@@ -1,21 +1,16 @@
 const router = require('express').Router();
 const { Op } = require("sequelize");
+const withAuth = require('../utils/auth')
 const { getStats, getGameHistory } = require('../utils/functions')
 const { User, Game } = require('../model')
 
-router.get('/', (req, res) => {    
-    if(!req.session.loggedIn) {
-        res.redirect('/login')
-        return
-    }
+router.get('/', withAuth, (req, res) => {    
     res.redirect(`/dashboard/${req.session.user_id}`)
-
 })
 
-
-router.get('/:id', (req, res) => {    
-    if(!req.session.loggedIn) {
-        res.redirect('/login')
+router.get('/:id', withAuth, (req, res) => {    
+    if(req.session.user_id !== req.params.id) {
+        res.status(400).json({ statusText: 'You do not have access to this game!'})
         return
     }
 

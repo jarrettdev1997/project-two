@@ -5,13 +5,11 @@ const hideForm = () => {
 const addNewGame = (event) => {
     event.preventDefault()
 
-    const friendUsername = $("#friend-username").val()
+    const friendUsername = $("#friend-username").val().trim()
 
     if(!friendUsername) {
         return
     }
-
-    console.log(friendUsername)
 
     fetch('/api/games', {
         method: 'post',
@@ -22,8 +20,6 @@ const addNewGame = (event) => {
     })
     .then(response => {
         return response.json()
-        console.log(newGame)
-        // window.location = `/games/${newGame.id}`
     })
     .then(newGame => {
         console.log(newGame)
