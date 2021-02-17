@@ -1,8 +1,9 @@
 body {
-    background-color: #566982
+    background-color: #9DC3E6;
 }
 .game-container {
     background: #e8edea;
+    color: #F4B183;
     padding: 2%;
     border: 2px double white;
     border-width: thick;
@@ -22,8 +23,8 @@ nav, section {
     background-color: white;
 }
 .game-board table {
-    width: 500px;
-    height: 500px;
+    width: 450px;
+    height: 450px;
 }
 
 tr, td {
@@ -39,4 +40,52 @@ td div {
 *, ::after, ::before {
     box-sizing: border-box;
     text-align: center;
+}
+
+.players {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Media Query */
+@media screen and (max-width: 575px) {
+#board-game {
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    border: none;
+}
+.game-board table {
+    width: 100px;
+    height: 100px;
+}
+.game-container {
+    margin-right: 0;
+    margin-left: 0;
+    border: none;
+    padding: 0;
+}
+.players {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+td div {
+    height: 100%;
+    font-size: 50px;
+    cursor: pointer;
+    background-color: #e8edea;
+    text-align: center;
+}
+}
+@media screen and (max-width: 768px) {
+.game-container {
+    margin-right: 10%;
+    margin-left: 10%;
+}
+#board-game {
+    border: none;
+    padding: 5px;
+}
+
 }
