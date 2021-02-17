@@ -1,22 +1,26 @@
 <div class ="game-container">
     <div class="turn-status col">
-    <h2>Current Players turn</h2>
-</div>
+        {{#unless (isFinished game.status)}}
+            <h2 id="turn-user" data-userid="{{game.whos_turn.id}}">{{currentTurn session game}}</h2>
+        {{/unless}}
+    </div>
     <div class="players">
-    <div class="row user-name">
-                <h1>Player 1</h1>
-            </div>
-            <div class="row user-name-2">
-                <h1>Player 2</h1>
-            </div> 
-            </div>
+        <div class="row user-name">
+            <h1 id="user-x" data-userid="{{game.game_owner.id}}">{{game.game_owner.username}}</h1>
+        </div>
+        <div class="row user-name-2">
+            <h1 id="user-o" data-userid="{{game.friend.id}}">{{game.friend.username}}</h1>
+        </div> 
+    </div>
 <section class="game-board">
 {{>board}}
 </section>
 <div class="waiting-for-opponent">Waiting for opponents move ...</div>
 </div>
 <div class="game-nav">
-    <h3>Exit</h3>
+    <a href="/dashboard">
+        <h3>Exit</h3>
+    </a>
 </div>
 
 {{#unless (isFinished game.status)}}

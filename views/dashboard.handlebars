@@ -22,15 +22,17 @@
 
 <section id="new-game">
     <h1>Start a new game!</h1>
-    <button id="start-game" type="button" data-toggle="collapse" data-target="#new-game-form" aria-expanded="false" aria-controls="new-game-form">
+    <button id="start-game" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#new-game-form" aria-expanded="false" aria-controls="new-game-form">
         Start Game
     </button>
 
     <form id="new-game-form" class="collapse">
-        <label for="friend-username">Who would you like to play with?</label>
-        <input type="text" id="friend-username" name="friend-username">
-        <button type="submit">Submit</button>
-        <button id="cancel-new-game" type="button" data-toggle="collapse" data-target="#new-game-form" aria-expanded="false" aria-controls="new-game-form">Cancel</button>
+        <div class="form-group">
+            <label for="friend-username">Who would you like to play with?</label>
+            <input type="text" class="form-control" id="friend-username" name="friend-username">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button id="cancel-new-game" type="button" class="btn btn-danger" data-toggle="collapse" data-target="#new-game-form" aria-expanded="false" aria-controls="new-game-form">Cancel</button>            
+        </div>
     </form>    
 </section>
 
