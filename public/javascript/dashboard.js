@@ -14,7 +14,7 @@ const addNewGame = (event) => {
     console.log(friendId)
 
     fetch('/api/games', {
-        method: 'put',
+        method: 'post',
         body: JSON.stringify({
             friend_id: friendId
         }),
