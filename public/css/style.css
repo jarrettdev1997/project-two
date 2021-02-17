@@ -1,18 +1,42 @@
-.game-board {
+body {
+    background-color: #566982
+}
+.game-container {
+    background: #e8edea;
+    padding: 2%;
+    border: 2px double white;
+    border-width: thick;
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 20px;
+}
+
+nav, section {
     display: flex;
     justify-content: center;
 }
+#board-game {
+    border-collapse: separate;
+    border-spacing: 10px;
+    border: 2px solid black;
+    background-color: white;
+}
 .game-board table {
-    width: 90%;
+    width: 500px;
+    height: 500px;
 }
 
 tr, td {
     border: 1px solid black;
 }
 td div {
-    height: 50px;
-
+    height: 100%;
+    font-size: 90px;
     cursor: pointer;
-
+    background-color: #e8edea;
+    text-align: center;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
     text-align: center;
 }
