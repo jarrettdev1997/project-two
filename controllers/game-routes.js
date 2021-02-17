@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const { Game, Board, User } = require('../model')
+const { Game, Board, User } = require('../model');
+const withAuth = require('../utils/auth');
 
-router.get('/:id', (req, res) => {
+router.get('/:id', withAuth, (req, res) => {
     Game.findOne({
         where: {
             id: req.params.id
@@ -23,6 +24,11 @@ router.get('/:id', (req, res) => {
             },
             {
                 model: User,
+                as: 'whos_turn',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
                 as: 'winner',
                 attributes: { exclude: ['password']}
             },
@@ -35,7 +41,11 @@ router.get('/:id', (req, res) => {
     })
     .then(dbGameData => {
         const game = dbGameData.get({ plain: true })
-        res.render('game', game)
+        if (game.game_owner.id !== req.session.user_id && game.friend.id !== req.session.user_id) {
+            res.render('400', { session: req.session, statusText: 'You do not have access to the game you requested!'})
+            return
+        }
+        res.render('game', {session: req.session, game })
     })  
 })
 

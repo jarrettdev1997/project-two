@@ -35,6 +35,14 @@ Game.init(
                 key: 'id'
             }
         },
+        whos_turn_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
+        },
         board_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

@@ -2,9 +2,9 @@ module.exports = {
     getXorO: number => {
         let letter = ''
         if (number === 1) {
-            letter = 'X'
+            letter = 'close'
         } else if (number === 2) {
-            letter ='O'
+            letter ='panorama_fish_eye'
         }
         return letter
     },
@@ -14,5 +14,14 @@ module.exports = {
             bool = true
         }
         return bool
+    },
+    currentTurn: (session, game) => {
+        let string = ''
+        if (game.whos_turn.id === session.user_id) {
+            string = "It is your turn"
+        } else {
+            string = `It is ${game.whos_turn.username}'s turn`
+        }
+        return string
     }
 }

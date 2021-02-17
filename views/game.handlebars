@@ -19,9 +19,8 @@
     <h3>Exit</h3>
 </div>
 
-{{#unless (isFinished status)}}
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+{{#unless (isFinished game.status)}}
 <script src="/socket.io/socket.io.js"></script>
-<script src="/javascript/socket.js"></script>
-<script src="/javascript/board-requests.js"></script>
+<script src="/javascript/services/game-service.js"></script>
+<script src="/javascript/games.js" id="game-script-tag" data-user="{{session.user_id}}" data-turn="{{game.whos_turn.id}}"></script>
 {{/unless}}
