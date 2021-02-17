@@ -72,14 +72,13 @@ const fillInBoard = (board) => {
 }
 
 const updateBoard = (board) => {
-    console.log('here', board)
     fillInBoard(board)
     const winner = determineWinner(board)
     if (winner === 0 && !isGameFull) {
         return
     }
     const gameInfo = {
-        id: board.id,
+        id: $("#board-game").data('gameid'),
         status: 'finished',
         winner: null
     }

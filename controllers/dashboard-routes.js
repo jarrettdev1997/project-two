@@ -34,6 +34,11 @@ router.get('/:id', withAuth, (req, res) => {
             },
             {
                 model: User,
+                as: 'whosTurn',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
                 as: 'winner',
                 attributes: { exclude: ['password']}
             },

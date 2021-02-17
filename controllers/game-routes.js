@@ -24,6 +24,11 @@ router.get('/:id', withAuth, (req, res) => {
             },
             {
                 model: User,
+                as: 'whosTurn',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
                 as: 'winner',
                 attributes: { exclude: ['password']}
             },
@@ -40,7 +45,7 @@ router.get('/:id', withAuth, (req, res) => {
             res.render('400', { session: req.session, statusText: 'You do not have access to the game you requested!'})
             return
         }
-        res.render('game', game)
+        res.render('game', {session: req.session, game })
     })  
 })
 

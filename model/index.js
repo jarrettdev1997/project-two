@@ -11,6 +11,10 @@ User.hasMany(Game, {
     foreignKey: 'friend_id'
 })
 User.hasMany(Game, {
+    as: 'whosTurn',
+    foreignKey: 'whosTurn_id'
+})
+User.hasMany(Game, {
     as: 'winner',
     foreignKey: 'winner_id'
 })
@@ -26,6 +30,10 @@ Game.belongsTo(User, {
 Game.belongsTo(User, {
     as: 'friend',
     foreignKey: 'friend_id'
+})
+Game.belongsTo(User, {
+    as: 'whosTurn',
+    foreignKey: 'whosTurn_id'
 })
 Game.belongsTo(User, {
     as: 'winner',

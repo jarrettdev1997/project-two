@@ -65,7 +65,31 @@ router.put('/:id', withAuth, async (req, res) => {
         user = { user_id: req.session.user_id, XorO: 2 }
     }
     if (!user) {
-        res.status(500).json({ statusText: "You are not authorized to make this move!" })
+        res.status(400).json({ statusText: "You are not authorized to make this move!" })
+        return
+    }
+
+    if (game.whosTurn_id !== req.session.user_id) {
+        res.status(400).json({ statusText: "It is not your turn yet!" })
+        return
+    }
+
+    let turn = null
+    if (game.whosTurn_id === req.session.user_id) {
+        turn = { whosTurn_id: game.friend_id }
+    } else {
+        turn = { whosTurn_id: game.user_id }
+    }
+
+    const updateGame = await Game.update(turn, {
+        where: {
+            id: game.id
+        }
+    })
+
+    if (!updateGame) {
+        res.status(500).json(err)
+        return
     }
 
     const cellUpdate = {}

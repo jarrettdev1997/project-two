@@ -21,6 +21,11 @@ router.get('/', (req, res) => {
             },
             {
                 model: User,
+                as: 'whosTurn',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
                 as: 'winner',
                 attributes: { exclude: ['password']}
             },
@@ -56,6 +61,11 @@ router.get('/:id', (req, res) => {
             {
                 model: User,
                 as: 'friend',
+                attributes: { exclude: ['password']}
+            },
+            {
+                model: User,
+                as: 'whosTurn',
                 attributes: { exclude: ['password']}
             },
             {
@@ -107,6 +117,7 @@ router.post('/', async (req, res) => {
         status: 'not_started',
         owner_id: req.session.user_id,
         friend_id: friendUser.id,
+        whosTurn_id: 1,
         board_id: newBoard.id,
     })
     if (!newGame) {
@@ -120,6 +131,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', (req, res) => {
     Game.update({
         status: req.body.status,
+        whosTurn_id: 2,
         winner_id: req.body.winner_id,
         loser_id: req.body.loser_id
     },
@@ -142,15 +154,17 @@ router.put('/final/:id', (req, res) => {
         }
     })
     .then(gameData => {
+        const game = gameData.get({ plain: true })
+
         let winner_id = null;
         let loser_id = null;
 
         if (req.body.winner === 'owner') {
-            winner_id = gameData.owner_id;
-            loser_id = gameData.friend_id
+            winner_id = game.owner_id;
+            loser_id = game.friend_id
         } else if (req.body.winner === 'friend') {
-            loser_id = gameData.owner_id;
-            winner_id = gameData.friend_id
+            loser_id = game.owner_id;
+            winner_id = game.friend_id
         }
 
         return Game.update({

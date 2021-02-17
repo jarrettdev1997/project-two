@@ -30,7 +30,7 @@
 {{>board}}
 </section>
 
-{{#unless (isFinished status)}}
+{{#unless (isFinished game.status)}}
 <script src="/socket.io/socket.io.js"></script>
 <script src="/javascript/services/game-service.js"></script>
 <script src="/javascript/games.js"></script>
