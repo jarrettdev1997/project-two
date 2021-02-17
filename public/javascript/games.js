@@ -9,6 +9,7 @@ if(thisUserId === firstTurnId) {
     isTurn = true
 } else {
     isTurn = false
+    $('.waiting-for-opponent').text("Waiting for opponents move ...")
 }
 
 const sendUpdateToServer = function() {
@@ -113,15 +114,19 @@ const changeTurn = (currentUser) => {
     if($('#turn-user').data('userid') === xUser.id) {
         if (parseInt(currentUser) === oUser.id) {
             $('#turn-user').text(`It is your turn`)
+            $('.waiting-for-opponent').text()
         } else {
             $('#turn-user').text(`It is ${oUser.name}'s turn`)
+            $('.waiting-for-opponent').text("Waiting for opponents move ...")
         }
         $('#turn-user').data('userid', oUser.id)
     } else {
         if (parseInt(currentUser) === xUser.id) {
             $('#turn-user').text(`It is your turn`)
+            $('.waiting-for-opponent').text()
         } else {
             $('#turn-user').text(`It is ${xUser.name}'s turn`)
+            $('.waiting-for-opponent').text("Waiting for opponents move ...")
         }
         $('#turn-user').data('userid', xUser.id)
     }
@@ -151,6 +156,7 @@ const updateBoard = (data) => {
     }
 
     isTurn = false
+    $('.waiting-for-opponent').text()
     
     const gameInfo = {
         id: $("#board-game").data('gameid'),

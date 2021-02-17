@@ -23,7 +23,7 @@ const addNewGame = (event) => {
     })
     .then(newGame => {
         if(newGame.statusText) {
-            alert("You cannot start a game with yourself!")
+            alert(newGame.statusText)
             return
         }
         console.log(newGame)

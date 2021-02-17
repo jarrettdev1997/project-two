@@ -94,10 +94,12 @@ router.post('/', async (req, res) => {
             username: req.body.friend_username
         }
     })
+
     if (!friendUser) {
-        res.status(500).json(err)
+        res.status(500).json({statusText: "This user does not exist!"})
         return
     }
+
     const friend = friendUser.get({ plain: true })
 
     if (req.session.user_id === friend.id) {
@@ -137,7 +139,6 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-    console.log('we actually used this route line 132')
     Game.update({
         status: req.body.status,
         whos_turn: null,
