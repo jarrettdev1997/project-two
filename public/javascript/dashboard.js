@@ -23,7 +23,9 @@ const addNewGame = (event) => {
     })
     .then(newGame => {
         if(newGame.statusText) {
-            alert(newGame.statusText)
+            $(".modal-title").text('Error!')
+            $(".modal-body").find('p').text(newGame.statusText)
+            $('#myModal').modal('show');
             return
         }
         console.log(newGame)
@@ -33,6 +35,8 @@ const addNewGame = (event) => {
         console.log(err)
     })
 }
+
+$('#myModal').modal({ show: false})
 
 $('#cancel-new-game').click(hideForm)
 $('#new-game-form').submit(addNewGame)

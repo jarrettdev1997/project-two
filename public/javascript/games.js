@@ -1,5 +1,7 @@
 var socket = io()
 
+$('#myModal').modal({ show: false})
+
 var thisUserId = $('#game-script-tag').attr('data-user')
 var firstTurnId = $('#game-script-tag').attr('data-turn')
 
@@ -14,7 +16,9 @@ if(thisUserId === firstTurnId) {
 
 const sendUpdateToServer = function() {
     if (!isTurn) {
-        alert("It is not your turn yet!")
+        $(".modal-title").text('Hold Up!')
+        $(".modal-body").find('p').text("It is not your turn yet!")
+        $('#myModal').modal('show');
         return
     }
 
@@ -64,18 +68,28 @@ const sendFinalToServer = (gameInfo, currentUser) => {
     .then(() => {
         if (gameInfo.winner === 'owner') {
             if (xUser.id === parseInt(currentUser)) {
-                alert(`Congrats! You won the game`)
+                $(".modal-title").text('Yay!')
+                $(".modal-body").find('p').text("Congrats! You won the game")
+                $('#myModal').modal('show');
             } else {
-                alert(`Sorry! You lost the game`)
+                $(".modal-title").text('Darn!')
+                $(".modal-body").find('p').text("Sorry! You lost the game")
+                $('#myModal').modal('show');
             }
         } else if (gameInfo.winner === 'friend') {
             if (oUser.id === parseInt(currentUser)) {
-                alert(`Congrats! You won the game`)
+                $(".modal-title").text('Yay!')
+                $(".modal-body").find('p').text("Congrats! You won the game")
+                $('#myModal').modal('show');
             } else {
-                alert(`Sorry! You lost the game`)
+                $(".modal-title").text('Darn!')
+                $(".modal-body").find('p').text("Sorry! You lost the game")
+                $('#myModal').modal('show');
             }
         } else {
-            alert(`You have both tied the game`)
+            $(".modal-title").text('Eh')
+            $(".modal-body").find('p').text("You have both tied the game")
+            $('#myModal').modal('show');
         }
         window.location = '/'
     })

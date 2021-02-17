@@ -8,8 +8,12 @@ const logoutUser = async function() {
     if (response.ok) {
         window.location = '/'
     } else {
-        alert(response.statusText)
+        $(".modal-title").text('Error')
+        $(".modal-body").find('p').text("Something went wrong.")
+        $('#myModal').modal('show');
     }
 }
+
+$('#myModal').modal({ show: false})
 
 $('#logout-btn').click(logoutUser)
