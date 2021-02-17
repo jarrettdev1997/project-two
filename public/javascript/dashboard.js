@@ -5,22 +5,28 @@ const hideForm = () => {
 const addNewGame = (event) => {
     event.preventDefault()
 
-    const friendId = $("#friend-username").val()
+    const friendUsername = $("#friend-username").val().trim()
 
-    if(!friendId) {
+    if(!friendUsername) {
         return
     }
 
-    console.log(friendId)
-
     fetch('/api/games', {
-        method: 'put',
+        method: 'post',
         body: JSON.stringify({
-            friend_id: friendId
+            friend_username: friendUsername
         }),
         headers: {'Content-Type': 'application/json'}
     })
+    .then(response => {
+        return response.json()
+    })
     .then(newGame => {
+        if(newGame.statusText) {
+            alert("You cannot start a game with yourself!")
+            return
+        }
+        console.log(newGame)
         window.location = `/games/${newGame.id}`
     })
     .catch(err => {

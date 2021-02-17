@@ -1,31 +1,30 @@
-const userLogin = function(event) {
-    event.preventDefault()
-    
-    const username = $('#username-input').val()
-    const password = $('#password-input').val()
-
+async function loginFormHandler(event) {
+    event.preventDefault();
+  
+    const username = document.querySelector('#username-input').value.trim();
+    const password = document.querySelector('#password-input').value.trim();
+  
     if (username && password) {
-        loginUser(username, password)
-    }
-}
-
-async function loginUser(username, password) {
-    const response = await fetch('/api/users/login', {
+      const response = await fetch('/api/users/login', {
         method: 'post',
         body: JSON.stringify({
-            username,
-            password
+          username,
+          password
         }),
-        headers: {'Content-Type': 'application/json'}
-    })
+        headers: { 'Content-Type': 'application/json' }
+      });
+  
+      if (response.ok) {
+        document.location = '/';
+        return
+      }
 
-    if (response.ok) {
-        window.location = '/dashboard'
+      const respMessage = await response.json()
+
+      alert(respMessage.statusText)
     } else {
-        $('#password-input').val('')
-        console.log(response)
-        alert(response.statusText)
+      alert('Please fill in both the username and password to login.')
     }
-}
+  }
 
-$('.login-form').submit(userLogin)
+document.querySelector('.login-form').addEventListener('submit', loginFormHandler);

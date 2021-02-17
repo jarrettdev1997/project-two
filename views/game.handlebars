@@ -10,18 +10,20 @@
                 <span class="material-icons">close</span>
             </div>
             <div class="row user-name">
-                <h1>ddaly</h1>
+                <h1 id="user-x" data-userid="{{game.game_owner.id}}">{{game.game_owner.username}}</h1>
             </div>
         </div>
         <div class="turn-status col">
-            <h2>It is ddaly's turn</h2>
+            {{#unless (isFinished game.status)}}
+            <h2 id="turn-user" data-userid="{{game.whos_turn.id}}">{{currentTurn session game}}</h2>
+            {{/unless}}
         </div>
         <div class="o-player player col">
             <div class="row x-or-o-icon">
                 <span class="material-icons">panorama_fish_eye</span>
             </div>
             <div class="row user-name">
-                <h1>krob</h1>
+                <h1 id="user-o" data-userid="{{game.friend.id}}">{{game.friend.username}}</h1>
             </div> 
         </div>
     </div>
@@ -30,7 +32,8 @@
 {{>board}}
 </section>
 
-{{#unless (isFinished status)}}
+{{#unless (isFinished game.status)}}
 <script src="/socket.io/socket.io.js"></script>
-<script src="/javascript/games.js"></script>
+<script src="/javascript/services/game-service.js"></script>
+<script src="/javascript/games.js" id="game-script-tag" data-user="{{session.user_id}}" data-turn="{{game.whos_turn.id}}"></script>
 {{/unless}}

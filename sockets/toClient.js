@@ -1,7 +1,7 @@
 class toClient {
     constructor() {}
-    emitBoardUpdate(app, gameId, data) {
-        app.io.emit(`game-${gameId}`, data)
+    emitBoardUpdate(app, gameId, turnId, board) {
+        app.io.emit(`game-${gameId}`, { turnId, board })
     }
 }
 

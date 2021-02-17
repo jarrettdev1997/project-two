@@ -14,5 +14,14 @@ module.exports = {
             bool = true
         }
         return bool
+    },
+    currentTurn: (session, game) => {
+        let string = ''
+        if (game.whos_turn.id === session.user_id) {
+            string = "It is your turn"
+        } else {
+            string = `It is ${game.whos_turn.username}'s turn`
+        }
+        return string
     }
 }
