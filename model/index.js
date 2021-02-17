@@ -11,8 +11,8 @@ User.hasMany(Game, {
     foreignKey: 'friend_id'
 })
 User.hasMany(Game, {
-    as: 'whosTurn',
-    foreignKey: 'whosTurn_id'
+    as: 'whos_turn',
+    foreignKey: 'whos_turn_id'
 })
 User.hasMany(Game, {
     as: 'winner',
@@ -32,8 +32,8 @@ Game.belongsTo(User, {
     foreignKey: 'friend_id'
 })
 Game.belongsTo(User, {
-    as: 'whosTurn',
-    foreignKey: 'whosTurn_id'
+    as: 'whos_turn',
+    foreignKey: 'whos_turn_id'
 })
 Game.belongsTo(User, {
     as: 'winner',

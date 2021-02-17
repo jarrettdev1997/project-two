@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
             },
             {
                 model: User,
-                as: 'whosTurn',
+                as: 'whos_turn',
                 attributes: { exclude: ['password']}
             },
             {
@@ -65,7 +65,7 @@ router.get('/:id', (req, res) => {
             },
             {
                 model: User,
-                as: 'whosTurn',
+                as: 'whos_turn',
                 attributes: { exclude: ['password']}
             },
             {
@@ -117,7 +117,7 @@ router.post('/', async (req, res) => {
         status: 'not_started',
         owner_id: req.session.user_id,
         friend_id: friendUser.id,
-        whosTurn_id: 1,
+        whos_turn_id: req.session.user_id,
         board_id: newBoard.id,
     })
     if (!newGame) {
@@ -129,9 +129,10 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+    console.log('we actually used this route line 132')
     Game.update({
         status: req.body.status,
-        whosTurn_id: 2,
+        whos_turn: null,
         winner_id: req.body.winner_id,
         loser_id: req.body.loser_id
     },
@@ -170,7 +171,8 @@ router.put('/final/:id', (req, res) => {
         return Game.update({
             status: req.body.status,
             winner_id,
-            loser_id
+            loser_id,
+            whos_turn_id: null
         },
         {
             where: {

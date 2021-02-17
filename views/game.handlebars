@@ -10,18 +10,18 @@
                 <span class="material-icons">close</span>
             </div>
             <div class="row user-name">
-                <h1>ddaly</h1>
+                <h1>{{game.game_owner.username}}</h1>
             </div>
         </div>
         <div class="turn-status col">
-            <h2>It is ddaly's turn</h2>
+            <h2>It is {{game.whos_turn.username}}'s turn</h2>
         </div>
         <div class="o-player player col">
             <div class="row x-or-o-icon">
                 <span class="material-icons">panorama_fish_eye</span>
             </div>
             <div class="row user-name">
-                <h1>krob</h1>
+                <h1>{{game.friend.username}}</h1>
             </div> 
         </div>
     </div>
@@ -33,5 +33,5 @@
 {{#unless (isFinished game.status)}}
 <script src="/socket.io/socket.io.js"></script>
 <script src="/javascript/services/game-service.js"></script>
-<script src="/javascript/games.js"></script>
+<script src="/javascript/games.js" id="game-script-tag" data-user="{{session.user_id}}" data-turn="{{game.whos_turn.id}}"></script>
 {{/unless}}

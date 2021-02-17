@@ -69,8 +69,7 @@ var isGameFull = (board) => {
     board.lower_left !== 0 &&
     board.lower_mid !== 0 &&
     board.lower_right !== 0
-  ); 
-  console.log("The game full: " + retValue);
+  );
   return retValue;
 }
 
@@ -82,28 +81,4 @@ var determineWinner = (board) => {
     return 2;
   }
   return 0;
-}
-
-var isMoveValid = (move, board) => {
-  if (move === 0 && board.upper_left === 0) {
-    return true;
-  } else if (move === 1 && board.upper_mid === 0) {
-    return true;
-  } else if (move === 2 && board.upper_right === 0) {
-    return true;
-  } else if (move === 3 && board.center_left === 0) {
-    return true;
-  } else if (move === 4 && board.center_mid === 0) {
-    return true;
-  } else if (move === 5 && board.center_right === 0) {
-    return true;
-  } else if (move === 6 && board.lower_left === 0) {
-    return true;
-  } else if (move === 7 && board.lower_mid === 0) {
-    return true;
-  } else if (move === 8 && board.lower_right === 0) {
-    return true;
-  } else {
-    return false;
-  }
 }

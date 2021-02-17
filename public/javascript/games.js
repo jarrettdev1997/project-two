@@ -1,6 +1,22 @@
 var socket = io()
 
+var thisUserId = $('#game-script-tag').attr('data-user')
+var firstTurnId = $('#game-script-tag').attr('data-turn')
+
+var isTurn = null;
+
+if(thisUserId === firstTurnId) {
+    isTurn = true
+} else {
+    isTurn = false
+}
+
 const sendUpdateToServer = function() {
+    if (!isTurn) {
+        alert("It isn't your turn yet!")
+        return
+    }
+
     const boardTable = $("#board-game")
 
     const clickOptions = ["upper_left", "upper_mid", "upper_right", "center_left", "center_mid", "center_right", "lower_left", "lower_mid", "lower_right"]
@@ -71,12 +87,24 @@ const fillInBoard = (board) => {
     })
 }
 
-const updateBoard = (board) => {
+const updateBoard = (data) => {
+    const board = data.board
+    
     fillInBoard(board)
+
     const winner = determineWinner(board)
-    if (winner === 0 && !isGameFull) {
+    
+    if (winner === 0 && !isGameFull(board)) {
+        if (parseInt(window.localStorage.getItem('user_id')) === data.turnId) {
+            isTurn = true
+        } else {
+            isTurn = false
+        }
         return
     }
+
+    isTurn = false
+    
     const gameInfo = {
         id: $("#board-game").data('gameid'),
         status: 'finished',
@@ -95,6 +123,8 @@ const updateBoard = (board) => {
     }
     sendFinalToServer(gameInfo)
 }
+
+window.localStorage.setItem('user_id', thisUserId)
 
 const windowPath = location.href.split('/')[location.href.split('/').length-1]
 socket.on(`game-${windowPath}`, data => updateBoard(data))

@@ -24,7 +24,7 @@ router.get('/:id', withAuth, (req, res) => {
             },
             {
                 model: User,
-                as: 'whosTurn',
+                as: 'whos_turn',
                 attributes: { exclude: ['password']}
             },
             {

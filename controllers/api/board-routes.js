@@ -68,19 +68,19 @@ router.put('/:id', withAuth, async (req, res) => {
         res.status(400).json({ statusText: "You are not authorized to make this move!" })
         return
     }
-
-    if (game.whosTurn_id !== req.session.user_id) {
+    console.log('beforemove:' + game.whos_turn_id)
+    if (game.whos_turn_id !== req.session.user_id) {
         res.status(400).json({ statusText: "It is not your turn yet!" })
         return
     }
 
     let turn = null
-    if (game.whosTurn_id === req.session.user_id) {
-        turn = { whosTurn_id: game.friend_id }
+    if (game.whos_turn_id === game.owner_id) {
+        turn = { whos_turn_id: game.friend_id }
     } else {
-        turn = { whosTurn_id: game.user_id }
+        turn = { whos_turn_id: game.owner_id }
     }
-
+    console.log('aftermove:' + turn.whos_turn_id)
     const updateGame = await Game.update(turn, {
         where: {
             id: game.id
@@ -120,7 +120,7 @@ router.put('/:id', withAuth, async (req, res) => {
     const board = findBoard.get({ plain: true })
 
     const to = new toClient()
-    to.emitBoardUpdate(req.app, game.id, board);
+    to.emitBoardUpdate(req.app, game.id, turn.whos_turn_id, board);
     res.json(board)
 })
 
