@@ -44,39 +44,60 @@ router.post('/', (req, res) => {
     });
 })
 
-router.put('/:id', withAuth, (req, res) => {
-    Game.findOne({
+router.put('/:id', withAuth, async (req, res) => {
+    const findGame = await Game.findOne({
         where: {
             id: req.params.id
         }
     })
-    .then(gameData => {
-        let user = null
-        if (req.session.user_id === gameData.owner_id) {
-            user = { user_id: req.session.user_id, XorO: 1 }
-        } else if (req.session.user_id === gameData.friend_id) {
-            user = { user_id: req.session.user_id, XorO: 2 }
-        }
-        if (!user) {
-            res.status(500).json({ statusText: "You are not authorized to make this move!" })
-        }
-        const cellUpdate = {}
-        cellUpdate[req.body.cellClicked] = user.XorO
-        return Board.update(cellUpdate, {
-            where: {
-                id: gameData.board_id
-            }
-        })
-    })        
-    .then(dbBoardData => {
-        const to = new toClient()
-        to.emitBoardUpdate(req.app, dbBoardData.id, dbBoardData);
-        res.json(dbBoardData)
-    })
-    .catch(err => {
-        console.log(err)
+
+    if (!findGame) {
         res.status(500).json(err)
-    });
+        return
+    }
+
+    const game = findGame.get({ plain: true })
+
+    let user = null
+    if (req.session.user_id === game.owner_id) {
+        user = { user_id: req.session.user_id, XorO: 1 }
+    } else if (req.session.user_id === game.friend_id) {
+        user = { user_id: req.session.user_id, XorO: 2 }
+    }
+    if (!user) {
+        res.status(500).json({ statusText: "You are not authorized to make this move!" })
+    }
+
+    const cellUpdate = {}
+    cellUpdate[req.body.cellClicked] = user.XorO
+
+    const updateBoard = await Board.update(cellUpdate, {
+        where: {
+            id: game.board_id
+        }
+    })
+    
+    if (!updateBoard) {
+        res.status(500).json(err)
+        return
+    }
+
+    const findBoard = await Board.findOne({
+        where: {
+            id: game.board_id
+        }
+    })
+
+    if (!findBoard) {
+        res.status(500).json(err)
+        return
+    }
+
+    const board = findBoard.get({ plain: true })
+
+    const to = new toClient()
+    to.emitBoardUpdate(req.app, game.id, board);
+    res.json(board)
 })
 
 module.exports = router

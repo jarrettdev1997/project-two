@@ -58,7 +58,7 @@ var determineAWinner = (board, player) => {
   return false;
 }
 
-var isGameOver = (board) => {
+var isGameFull = (board) => {
   const retValue = (
     board.upper_left !== 0 &&
     board.upper_mid !== 0 &&
@@ -70,7 +70,7 @@ var isGameOver = (board) => {
     board.lower_mid !== 0 &&
     board.lower_right !== 0
   ); 
-  console.log("xxx " + retValue);
+  console.log("The game full: " + retValue);
   return retValue;
 }
 

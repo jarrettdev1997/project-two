@@ -93,7 +93,6 @@ router.post('/', async (req, res) => {
         res.status(500).json(err)
         return
     }
-    console.log(req.body.friend_username)
     const friendUser = await User.findOne({
         where: {
             username: req.body.friend_username

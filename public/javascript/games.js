@@ -17,21 +17,23 @@ const sendUpdateToServer = function() {
         return
     }
 
-    const gameId = boardTable.dataset.gameid
+    const gameId = boardTable.data('gameid')
 
     fetch(`/api/boards/${gameId}`, {
         method: 'put',
         body: JSON.stringify({
-            cellClicked: cellClickedId
+            cellClicked: clickedId
         }),
         headers: {'Content-Type': 'application/json'}
     })
-    .then(dbData => {
-        console.log({ fromJS: dbData })
-    })      
+    .then()
+    .catch(err => {
+        console.log(err)
+    })
 }
 
 const sendFinalToServer = (gameInfo) => {
+    console.log('game finished!', gameInfo)
     fetch(`/api/games/final/${gameInfo.id}`, {
         method: 'put',
         body: JSON.stringify({
@@ -40,9 +42,10 @@ const sendFinalToServer = (gameInfo) => {
         }),
         headers: {'Content-Type': 'application/json'}
     })
-    .then(dbData => {
-        console.log({ fromJS: dbData })
-    }) 
+    .then()
+    .catch(err => {
+        console.log(err)
+    })
 }
 
 const XorOorBlank = (number) => {
@@ -64,13 +67,15 @@ const XorOorBlank = (number) => {
 const fillInBoard = (board) => {
     const boardCells = $("table#board-game td")
     boardCells.each(function() {
-        $(this).text(XorOorBlank(board[$(this).attr('id')]))
+        $(this).find('span').text(XorOorBlank(board[$(this).attr('id')]))
     })
 }
 
 const updateBoard = (board) => {
+    console.log('here', board)
     fillInBoard(board)
-    if(!isGameOver(board)) {
+    const winner = determineWinner(board)
+    if (winner === 0 && !isGameFull) {
         return
     }
     const gameInfo = {
@@ -78,7 +83,7 @@ const updateBoard = (board) => {
         status: 'finished',
         winner: null
     }
-    switch (determineWinner(board)) {
+    switch (winner) {
         case 1:
             gameInfo.winner = 'owner'
             break;
@@ -95,4 +100,4 @@ const updateBoard = (board) => {
 const windowPath = location.href.split('/')[location.href.split('/').length-1]
 socket.on(`game-${windowPath}`, data => updateBoard(data))
 
-$('td').on('click', updateBoard)
+$('td').on('click', sendUpdateToServer)
