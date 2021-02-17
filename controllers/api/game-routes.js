@@ -3,7 +3,6 @@ const { Game, User, Board } = require('../../model')
 // const withAuth = require('../../utils/auth')
 
 router.get('/', (req, res) => {
-    console.log("get");
     Game.findAll({
         attributes: ['id', 'status'],
         include: [
@@ -78,9 +77,8 @@ router.get('/:id', (req, res) => {
     });
 })
 
-router.post('/', (req, res) => {
-    console.log("post");
-    Board.create({
+router.post('/', async (req, res) => {
+    const newBoard = await Board.create({
         upper_left: 0,
         upper_mid: 0,
         upper_right: 0,
@@ -91,23 +89,33 @@ router.post('/', (req, res) => {
         lower_mid: 0,
         lower_right: 0,
     })
-    .then(dbBoardData => {
-        Game.create({
-            status: 'not_started',
-            owner_id: req.session.user_id,
-            friend_id: req.body.friend_id,
-            board_id: dbBoardData.id,
-        })
-        .then(dbGameData => res.json(dbGameData))
-        .catch(err => {
-            console.log(err)
-            res.status(500).json(err)
-        });
-    })
-    .catch(err => {
-        console.log(err)
+    if (!newBoard) {
         res.status(500).json(err)
-    });
+        return
+    }
+    console.log(req.body.friend_username)
+    const friendUser = await User.findOne({
+        where: {
+            username: req.body.friend_username
+        }
+    })
+    if (!friendUser) {
+        res.status(500).json(err)
+        return
+    }
+
+    const newGame = await Game.create({
+        status: 'not_started',
+        owner_id: req.session.user_id,
+        friend_id: friendUser.id,
+        board_id: newBoard.id,
+    })
+    if (!newGame) {
+        res.status(500).json(err)
+        return
+    }
+
+    res.json(newGame)
 })
 
 router.put('/:id', (req, res) => {

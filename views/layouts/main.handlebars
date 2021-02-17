@@ -22,28 +22,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarDropDown">
                 <ul class="navbar-nav mr-auto align-items-md-center">
-                    {{!-- Only if the user is not logged in yet --}}
+                    {{#unless session.loggedIn}}
                     <li class="nav-item active">
                         <a class="nav-link d-flex" href="/">
                             <span class="material-icons">home</span>
                         </a>
                     </li>
-                    {{!-- Only if the user is not logged in yet --}}
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
-                    {{!-- Only if the user is logged in yet --}}
+                    {{else}}
                     <li class="nav-item">
                         <a class="nav-link" href="/dashboard">Dashboard</a>
                     </li>
-                    {{!-- Only if the user is logged in yet --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/requests">Requests</a>
-                    </li>
-                    {{!-- Only if the user is logged in yet --}}
                     <li class="nav-item">
                         <button type="button" class="btn btn-link nav-link" id="logout-btn">Logout</button>
                     </li>
+                    {{/unless}}
                 </ul>
             </div>
         </nav>
