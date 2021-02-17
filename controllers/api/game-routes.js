@@ -88,6 +88,23 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+    
+    const friendUser = await User.findOne({
+        where: {
+            username: req.body.friend_username
+        }
+    })
+    if (!friendUser) {
+        res.status(500).json(err)
+        return
+    }
+    const friend = friendUser.get({ plain: true })
+
+    if (req.session.user_id === friend.id) {
+        res.status(400).json({statusText: "You cannot start a game with your self!"})
+        return
+    }
+
     const newBoard = await Board.create({
         upper_left: 0,
         upper_mid: 0,
@@ -103,20 +120,11 @@ router.post('/', async (req, res) => {
         res.status(500).json(err)
         return
     }
-    const friendUser = await User.findOne({
-        where: {
-            username: req.body.friend_username
-        }
-    })
-    if (!friendUser) {
-        res.status(500).json(err)
-        return
-    }
 
     const newGame = await Game.create({
         status: 'not_started',
         owner_id: req.session.user_id,
-        friend_id: friendUser.id,
+        friend_id: friend.id,
         whos_turn_id: req.session.user_id,
         board_id: newBoard.id,
     })

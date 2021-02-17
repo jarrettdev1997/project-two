@@ -22,6 +22,10 @@ const addNewGame = (event) => {
         return response.json()
     })
     .then(newGame => {
+        if(newGame.statusText) {
+            alert("You cannot start a game with yourself!")
+            return
+        }
         console.log(newGame)
         window.location = `/games/${newGame.id}`
     })
