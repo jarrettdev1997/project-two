@@ -35,11 +35,11 @@ router.get('/:id', withAuth, (req, res) => {
         ]
     })
     .then(dbGameData => {
-        if (dbGameData.owner_id !== req.session.user_id || dbGameData.friend_id !== req.session.user_id) {
-            res.status(400).json({ statusText: 'You do not have access to this game!'})
+        const game = dbGameData.get({ plain: true })
+        if (game.game_owner.id !== req.session.user_id && game.friend.id !== req.session.user_id) {
+            res.render('400', { session: req.session, statusText: 'You do not have access to the game you requested!'})
             return
         }
-        const game = dbGameData.get({ plain: true })
         res.render('game', game)
     })  
 })

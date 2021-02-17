@@ -9,8 +9,8 @@ router.get('/', withAuth, (req, res) => {
 })
 
 router.get('/:id', withAuth, (req, res) => {    
-    if(req.session.user_id !== req.params.id) {
-        res.status(400).json({ statusText: 'You do not have access to this game!'})
+    if(req.session.user_id !== Number(req.params.id)) {
+        res.render('400', { session: req.session, statusText: 'You do not have access to the dashboard you requested!'})
         return
     }
 

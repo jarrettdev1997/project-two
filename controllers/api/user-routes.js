@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Op } = require("sequelize");
 const { User, Game } = require('../../model')
-// const withAuth = require('../../utils/auth')
+const withAuth = require('../../utils/auth')
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
 
-        res.json({ user: dbUserData, message: 'You are now logged in!' });
+        res.json({ user: dbUserData, statusText: 'You are now logged in!' });
     })})
     .catch(err => {
         console.log(err)
@@ -70,7 +70,7 @@ router.post('/login', (req, res) => {
         }
     }).then(dbUserData => {
         if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that username!' });
+            res.status(400).json({ statusText: 'No user with that username!' });
             return;
         }
 
@@ -78,7 +78,7 @@ router.post('/login', (req, res) => {
         const validPassword = dbUserData.checkPassword(req.body.password);
 
         if (!validPassword) {
-            res.status(400).json({ message: 'Incorrect password!' });
+            res.status(400).json({ statusText: 'Incorrect password!' });
             return;
         }
 
@@ -88,12 +88,12 @@ router.post('/login', (req, res) => {
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
 
-            res.json({ user: dbUserData, message: 'You are now logged in!' });
+            res.json({ user: dbUserData, statusText: 'You are now logged in!' });
         })
     }); 
 });
 
-router.post ('/logout', (req, res ) => {
+router.post ('/logout', withAuth, (req, res ) => {
     if (req.session.loggedIn) {
         req.session.destroy (()=> {
             res.status(204).end()
