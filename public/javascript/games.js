@@ -1,5 +1,3 @@
-const { parse } = require("dotenv/types");
-
 var socket = io()
 
 var thisUserId = $('#game-script-tag').attr('data-user')
