@@ -16,9 +16,14 @@ async function loginFormHandler(event) {
   
       if (response.ok) {
         document.location = '/';
-      } else {
-        alert(response.statusText);
+        return
       }
+
+      const respMessage = await response.json()
+
+      alert(respMessage.statusText)
+    } else {
+      alert('Please fill in both the username and password to login.')
     }
   }
 

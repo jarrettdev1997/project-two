@@ -6,6 +6,8 @@ const userSignup = function(event) {
 
     if (username && password) {
         createUser(username, password)
+    } else {
+        alert('Please fill in both the username and password to sign-up.')
     }
 }
 
