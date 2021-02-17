@@ -13,7 +13,7 @@ if(thisUserId === firstTurnId) {
 
 const sendUpdateToServer = function() {
     if (!isTurn) {
-        alert("It isn't your turn yet!")
+        alert("It is not your turn yet!")
         return
     }
 
@@ -87,6 +87,31 @@ const fillInBoard = (board) => {
     })
 }
 
+const changeTurn = () => {
+    const xUser = { id: $("#user-x").data('userid'), name: $("#user-x").text() }
+    const yUser = { id: $("#user-y").data('userid'), name: $("#user-y").text() }
+
+    const currentUser = localStorage.getItem('user_id')
+    if(!currentUser) {
+        window.location = '/'
+        return
+    }
+
+    if($('#turn-user').data('userid') === xUser.id) {
+        if (parseInt(currentUser) === yUser.id) {
+            $('#turn-user').text(`It is your turn`)
+        } else {
+            $('#turn-user').text(`It is ${yUser.name}'s turn`)
+        }
+    } else {
+        if (parseInt(currentUser) === xUser.id) {
+            $('#turn-user').text(`It is your turn`)
+        } else {
+            $('#turn-user').text(`It is ${xUser.name}'s turn`)
+        }
+    }
+}
+
 const updateBoard = (data) => {
     const board = data.board
     
@@ -95,11 +120,17 @@ const updateBoard = (data) => {
     const winner = determineWinner(board)
     
     if (winner === 0 && !isGameFull(board)) {
-        if (parseInt(window.localStorage.getItem('user_id')) === data.turnId) {
+        let currentUser = localStorage.getItem('user_id')
+        if(!currentUser) {
+            window.location = '/'
+            return
+        } 
+        if (parseInt(currentUser) === data.turnId) {
             isTurn = true
         } else {
             isTurn = false
         }
+        changeTurn()
         return
     }
 
