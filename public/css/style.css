@@ -49,7 +49,16 @@ td div {
     display: flex;
     justify-content: space-around;
 }
-
+.btn-info {
+    margin: 0 auto;
+}
+ol {
+    margin: auto;
+}
+li {
+    text-align: left;
+    padding: 2px;
+}
 /* Media Query */
 @media screen and (max-width: 575px) {
 #board-game {

@@ -4,7 +4,7 @@ const sequelize = require('./config/connection');
 const exphbs = require('express-handlebars');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
