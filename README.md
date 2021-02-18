@@ -22,9 +22,11 @@ Tic - Tac - Whoa is an app designed to bring one of the most classic games to th
 
 * MySQL
 
-Link to deployed application:
+# Link to deployed application:
 
 https://tic-tac-toe-project-two.herokuapp.com/
+
+# Screenshots of Application
 
 ![image](https://user-images.githubusercontent.com/72107773/108435608-cb90a280-7217-11eb-94b5-f8dbcdf9eb83.png)
 
