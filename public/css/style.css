@@ -21,30 +21,20 @@ nav, section {
     border-spacing: 10px;
     border: 2px solid black;
     background-color: white;
-}
-.game-board table {
-    width: 450px;
-    height: 450px;
-}
 
-tr, td {
+    width: 80%;
+}
+#board-game tr, #board-game td {
     border: 1px solid black;
 }
-td {
-    width: 33.33333%
-}
-td div {
-    height: 100%;
-    font-size: 90px;
+#board-game td {
+    width: 33.33333%;
+    height: 150px;
+
     cursor: pointer;
     background-color: #e8edea;
     text-align: center;
 }
-*, ::after, ::before {
-    box-sizing: border-box;
-    text-align: center;
-}
-
 .players {
     display: flex;
     justify-content: space-around;
@@ -59,36 +49,34 @@ li {
     text-align: left;
     padding: 2px;
 }
-/* Media Query */
-@media screen and (max-width: 575px) {
-#board-game {
-    justify-content: center;
-    position: relative;
-    width: 100%;
-    border: none;
+h1 .material-icons {
+    font-size: 2.5rem
 }
-.game-board table {
-    width: 100px;
-    height: 100px;
+#board-game td .material-icons {
+    font-size: 120px
 }
-.game-container {
-    margin-right: 0;
-    margin-left: 0;
-    border: none;
-    padding: 0;
-}
-.players {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-td div {
-    height: 100%;
-    font-size: 50px;
-    cursor: pointer;
+
+#win-loss-stats table {
+    width: 50%;
     background-color: #e8edea;
-    text-align: center;
 }
+#win-loss-stats tr, #win-loss-stats td {
+    border: 1px solid black;
+}
+#game-status .list-group {
+    width: 75%
+}
+#game-status h3 {
+    margin: 15px 0;
+}
+/* Media Query */
+@media screen and (max-width: 1000px) {
+    #board-game {   
+        width: 90%;
+    }
+    td .material-icons {
+        font-size: 90px
+    }
 }
 @media screen and (max-width: 768px) {
 .game-container {
@@ -99,5 +87,41 @@ td div {
     border: none;
     padding: 5px;
 }
-
+#win-loss-stats table {
+    width: 80%;
 }
+}
+@media screen and (max-width: 575px) {
+#board-game {
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    border: none;
+}
+.game-container {
+    margin-right: 0;
+    margin-left: 0;
+    border: none;
+    padding: 0;
+}
+.players {
+    flex-direction: column;
+    align-items: center;
+}
+#board-game td {
+    height: 80px;
+}
+#board-game td .material-icons {
+    font-size: 50px
+}
+#win-loss-stats table {
+    width: 95%;
+}
+#game-status .list-group {
+    width: 95%
+}
+#game-status h3 {
+    font-size: 1.2rem
+}
+}
+

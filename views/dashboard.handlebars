@@ -1,10 +1,10 @@
-<section id="intro" class="d-flex flex-column">
+<section id="intro" class="d-flex flex-column text-center">
     <h1>Welcome {{session.username}}</h1>
-    <p>Here is your dashboard. You can view you career stats and also see you current games, pending requests, and past games that you have completed.</p>
+    <p>Here is your dashboard. You can view your career stats and also see you current games, pending requests, and past games that you have completed.</p>
     <p>To get started with a new game. Simply click the "Start Game" button and enter your friends username! Have Fun!</p>
 </section>
 
-<section id="win-loss-stats" class="d-flex flex-column">
+<section id="win-loss-stats" class="d-flex flex-column align-items-center text-center my-3">
     <h1>Career Stats</h1>
     <table>
         <tr>
@@ -20,7 +20,7 @@
     </table>    
 </section>
 
-<section id="new-game" class="d-flex flex-column">
+<section id="new-game" class="d-flex flex-column text-center my-3">
     <h1>Start a new game!</h1>
     <button id="start-game" class="btn btn-info" type="button" data-toggle="collapse" data-target="#new-game-form" aria-expanded="false" aria-controls="new-game-form">
         Start Game
@@ -36,8 +36,8 @@
     </form>    
 </section>
 
-<section id="game-status" class="d-flex flex-column">
-    <h1>Games Status</h1>
+<section id="game-status" class="d-flex align-items-center flex-column text-center my-3">
+    <h1>Games Repository</h1>
     {{#if history.inprogressGames}}
     <h3>Games in Progress</h3>
     <div class="list-group">
