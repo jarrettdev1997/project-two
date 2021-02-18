@@ -20,7 +20,7 @@
     </table>    
 </section>
 
-<section id="new-game" class="d-flex flex-column text-center my-3">
+<section id="new-game" class="d-flex align-items-center flex-column text-center my-3">
     <h1>Start a new game!</h1>
     <button id="start-game" class="btn btn-info" type="button" data-toggle="collapse" data-target="#new-game-form" aria-expanded="false" aria-controls="new-game-form">
         Start Game
@@ -28,8 +28,8 @@
 
     <form id="new-game-form" class="collapse">
         <div class="form-group">
-            <label for="friend-username">Who would you like to play with?</label>
-            <input type="text" class="form-control" id="friend-username" name="friend-username">
+            <label class="my-2" for="friend-username">Who would you like to play with?</label>
+            <input type="text" class="form-control my-3" id="friend-username" name="friend-username">
             <button type="submit" class="btn btn-success">Submit</button>
             <button id="cancel-new-game" type="button" class="btn btn-danger" data-toggle="collapse" data-target="#new-game-form" aria-expanded="false" aria-controls="new-game-form">Cancel</button>            
         </div>

@@ -122,8 +122,8 @@ const fillInBoard = (board) => {
 }
 
 const changeTurn = (currentUser) => {
-    const xUser = { id: $("#user-x").data('userid'), name: $("#user-x").text() }
-    const oUser = { id: $("#user-o").data('userid'), name: $("#user-o").text() }
+    const xUser = { id: $("#user-x").data('userid'), name: $("#user-x").text().split('-')[0].trim() }
+    const oUser = { id: $("#user-o").data('userid'), name: $("#user-o").text().split('-')[0].trim() }
 
     if($('#turn-user').data('userid') === xUser.id) {
         if (parseInt(currentUser) === oUser.id) {

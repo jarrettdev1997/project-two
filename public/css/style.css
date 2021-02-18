@@ -69,6 +69,9 @@ h1 .material-icons {
 #game-status h3 {
     margin: 15px 0;
 }
+#new-game-form {
+    width: 50%;
+}
 /* Media Query */
 @media screen and (max-width: 1000px) {
     #board-game {   
