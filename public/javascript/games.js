@@ -91,7 +91,9 @@ const sendFinalToServer = (gameInfo, currentUser) => {
             $(".modal-body").find('p').text("You have both tied the game")
             $('#myModal').modal('show');
         }
-        window.location = '/'
+        setTimeout(function () {
+            window.location = '/'
+        }, 5000);
     })
     .catch(err => {
         console.log(err)
