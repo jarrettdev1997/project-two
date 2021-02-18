@@ -10,7 +10,7 @@ Tic - Tac - Whoa is an app designed to bring one of the most classic games to th
 
 * Jarrett Devose 
 
-Languages + Technologies Used:
+# Languages + Technologies Used:
 
 * HTML
 
